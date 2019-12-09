@@ -1,26 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {Component} from 'react';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import {ContextConsumer} from './Context/appContext'
+import Browser from './Component/Browser';
+
+class App extends Component 
+{
+  render(){
+    return (
+      <div style = {container}>
+        <ContextConsumer>
+          {
+            (value)=>
+            {
+              return value.loggedIn ? <Browser /> : 
+              <a className="loginButton" href="http://localhost:8888">Spotify LogIn</a>
+            }
+          }
+        </ContextConsumer>
+      </div>
+    );
+  }
+  
 }
 
 export default App;
+
+const container = {
+  display: "grid",
+  height: "100%",
+  gridTemplateRows: "minmax(50px, min-content) auto",
+  color: "#F5F5F5"
+}
